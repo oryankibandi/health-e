@@ -1,8 +1,10 @@
 import bodyParser from 'body-parser';
 import express from 'express';
 import MedicalRecord from './medicalRecord.js';
+import Patient from './patient.js';
 
 const medRecord = new MedicalRecord();
+const patient = new Patient();
 
 const app = express();
 app.use(bodyParser.json());
@@ -15,10 +17,16 @@ app.get('/', function (req, res) {
   });
 });
 
+app.post('/patient', function (req, res) {
+  const idNo = req.body.idNo;
+  const fetchedPatient = patient.getPatient(idNo);
+  res.json(fetchedPatient);
+});
+
 app.post('/register-patient', function (req, res) {
   const patientRecord = req.body;
   //check if patient is already in database.if not...
-  const genesisRecord = medRecord.createGenesisRecord(req.body);
+  const genesisRecord = patient.registerPatient(req.body);
   res.json(genesisRecord);
 });
 
