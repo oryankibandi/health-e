@@ -1,59 +1,40 @@
 import bodyParser from 'body-parser';
 import express from 'express';
+import cors from 'cors';
+import 'dotenv/config';
+
+import { corsOptions } from '../config/corsOptions.js';
 import MedicalRecord from './medicalRecord.js';
 import Patient from './patient.js';
+import patientRoute from '../routes/patientRoute.js';
+import recordsRoute from '../routes/recordsRoute.js';
+import credentials from '../middleware/credentials.js';
+import userRoute from '../routes/userRoute.js';
+import getRequests from '../middleware/requests.js';
+import cookieParser from 'cookie-parser';
+import verifyToken from '../middleware/verifyJWT.js';
 
 const medRecord = new MedicalRecord();
 const patient = new Patient();
+const port = process.env.PORT;
 
 const app = express();
 app.use(bodyParser.json());
+app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.get('/', function (req, res) {
-  const chain = medRecord.medChain;
-  res.json({
-    chain: chain,
-  });
-});
+app.use(getRequests);
+app.use(credentials);
+app.use(cors(corsOptions));
 
-app.post('/patient', function (req, res) {
-  const idNo = req.body.idNo;
-  const fetchedPatient = patient.getPatient(idNo);
-  res.json(fetchedPatient);
-});
+app.use('/user', userRoute);
+//verify access token middleware
+app.use(verifyToken);
 
-app.post('/register-patient', function (req, res) {
-  const patientRecord = req.body;
-  //check if patient is already in database.if not...
-  const genesisRecord = patient.registerPatient(req.body);
-  res.json(genesisRecord);
-});
+app.use('/patient', patientRoute);
 
-app.post('/post-record', function (req, res) {
-  const consultaionRecord = req.body;
-  const previousRecord = medRecord.getLastBlock();
-  if (previousRecord) {
-    const prevHash = previousRecord.hash;
-    const nonce = medRecord.getNonce(prevHash, consultaionRecord);
-    const hash = medRecord.generateHash(nonce, prevHash, consultaionRecord);
-    const newRecord = medRecord.createNewRecord(
-      nonce,
-      prevHash,
-      hash,
-      consultaionRecord
-    );
-    res.json({
-      message: 'New Record creates successfully',
-      newRecord: newRecord,
-    });
-  } else {
-    res.json({
-      message: 'patient does not exist. Please register patient first',
-    });
-  }
-});
+app.use('/records', recordsRoute);
 
-app.listen('3000', function () {
-  console.log('listening on port 3000');
+app.listen(port, function () {
+  console.log(`listening on port ${port}`);
 });
