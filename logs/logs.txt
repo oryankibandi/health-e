@@ -1,1 +1,1 @@
-url:/patient method: POST origin:undefined 
+url:/patient/register method: POST origin:undefined 

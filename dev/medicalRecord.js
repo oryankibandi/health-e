@@ -5,7 +5,7 @@ class MedicalRecord {
     this.medChain = [];
     this.pendingMedTransaction = [];
   }
-  //this creates a new record with hash and recorddata provided
+  //this creates a new record with hash and record data provided
   createNewRecord(nonce, previousBlockHash, hash, recordData) {
     const newRecord = {
       timestamp: Date.now(),

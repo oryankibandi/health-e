@@ -2,6 +2,8 @@ import bodyParser from 'body-parser';
 import express from 'express';
 import cors from 'cors';
 import 'dotenv/config';
+import connect from '../config/connectDB.js';
+import mongoose from 'mongoose';
 
 import { corsOptions } from '../config/corsOptions.js';
 import MedicalRecord from './medicalRecord.js';
@@ -13,6 +15,9 @@ import userRoute from '../routes/userRoute.js';
 import getRequests from '../middleware/requests.js';
 import cookieParser from 'cookie-parser';
 import verifyToken from '../middleware/verifyJWT.js';
+
+//connect to MongoDB
+connect();
 
 const medRecord = new MedicalRecord();
 const patient = new Patient();
@@ -35,6 +40,9 @@ app.use('/patient', patientRoute);
 
 app.use('/records', recordsRoute);
 
-app.listen(port, function () {
-  console.log(`listening on port ${port}`);
+mongoose.connection.once('open', () => {
+  console.log('connected to MongoDB');
+  app.listen(port, function () {
+    console.log(`listening on port ${port}`);
+  });
 });
