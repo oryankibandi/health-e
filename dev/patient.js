@@ -12,7 +12,16 @@ class Patient {
       (this.patientHash = '');
   }
 
-  registerPatient({ firstName, lastName, idNo, phoneNo, email, gender }) {
+  registerPatient({
+    firstName,
+    lastName,
+    idNo,
+    phoneNo,
+    email,
+    gender,
+    doctor,
+    clinicRegestered,
+  }) {
     (this.firstName = firstName),
       (this.lastName = lastName),
       (this.idNo = idNo),
@@ -27,6 +36,8 @@ class Patient {
       phoneNo: phoneNo,
       email: email,
       gender: gender,
+      doctor: doctor,
+      clinicRegestered: clinicRegestered,
     });
     //send data to patient collection in DB with doc name as the hash of patient's gen block
 

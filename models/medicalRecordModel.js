@@ -14,19 +14,19 @@ const medRecordSchema = new Schema({
       nonce: { type: Number, required: true },
       previousHash: { type: String, required: true },
       record: {
-        symptoms: [{ type: String, required: true }],
+        symptoms: [{ type: String, default: null }],
         testsDone: Array,
-        diagnosis: { type: String, required: String },
+        diagnosis: { type: String },
         prescription: [
           {
-            name: { type: String, required: true },
-            type: { type: String, required: true },
-            method: { type: String, required: true },
+            name: { type: String, default: null },
+            type: { type: String, default: null },
+            method: { type: String, default: null },
           },
         ],
         nextAppointment: {
-          date: { type: String },
-          time: { type: Date },
+          date: { type: String, default: null },
+          time: { type: Date, default: null },
         },
       },
     },

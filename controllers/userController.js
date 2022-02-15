@@ -35,6 +35,7 @@ async function loginUser(req, res) {
     {
       userData: {
         username: foundUser.name,
+        userId: foundUser.userId,
         email: foundUser.email,
         roles: foundUser.roles, //the role would be got from the DB
       },
@@ -101,6 +102,7 @@ async function refreshToken(req, res) {
       {
         userData: {
           username: decoded.userData.username,
+          userId: decoded.userData.userId,
           email: decodedEmail,
           roles: decoded.userData.roles,
         },

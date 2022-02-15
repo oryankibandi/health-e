@@ -1,5 +1,6 @@
 import Patient from '../dev/patient.js';
 import PatientModel from '../models/PatientModel.js';
+import MedicalRecordModel from '../models/medicalRecordModel.js';
 
 const patient = new Patient();
 
@@ -16,6 +17,8 @@ function getPatient(req, res) {
 
 async function registerPatient(req, res) {
   const patientRecord = req.body;
+  patientRecord.doctor = req.userId;
+  console.log('doctor:', req.userId);
   if (
     !patientRecord.firstName ||
     !patientRecord.lastName ||
@@ -51,8 +54,29 @@ async function registerPatient(req, res) {
     patientHash: genesisHash,
     records: [genesisHash],
   });
+
+  //sending the genesis records to DB
+  const createdMR = await MedicalRecordModel.create({
+    genHash: genesisRecord.hash,
+    records: [
+      {
+        patientIdNo: patientRecord.idNo,
+        //date: { type: Date, required: true, default: Date.now() },
+        clinic: patientRecord.clinicRegestered,
+        doctor: req.userId, //userId
+        hash: genesisRecord.hash,
+        nonce: genesisRecord.nonce,
+        previousHash: genesisRecord.previousBlockHash,
+        record: null,
+      },
+    ],
+  });
+
   console.log(createdPatient);
-  res.status(200).json(genesisRecord);
+  res.status(200).json({
+    genesisRecord: genesisRecord,
+    createdMR: createdMR,
+  });
 }
 
 export { registerPatient, getPatient };

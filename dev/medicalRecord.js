@@ -8,7 +8,7 @@ class MedicalRecord {
   //this creates a new record with hash and record data provided
   createNewRecord(nonce, previousBlockHash, hash, recordData) {
     const newRecord = {
-      timestamp: Date.now(),
+      date: Date.now(),
       recordData: recordData,
       nonce: nonce,
       previousBlockHash: previousBlockHash,
@@ -29,7 +29,7 @@ class MedicalRecord {
     const hash = this.generateHash(100, '0', patientCredentials);
     console.log('hash: ', hash);
     const genBlock = this.createNewRecord(100, '0', hash, patientCredentials);
-    //create a doc with hash as id and send this to database
+    //sending gen record to DB
 
     console.log('genBlock: ', genBlock);
     return genBlock;

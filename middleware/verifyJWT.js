@@ -13,6 +13,7 @@ function verifyToken(req, res, next) {
     console.log('decoded: ', decoded);
     req.user = decoded.userData.username;
     req.roles = decoded.userData.roles;
+    req.userId = decoded.userData.userId;
     next();
   });
 }
