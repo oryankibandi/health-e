@@ -10,6 +10,7 @@ import MedicalRecord from './medicalRecord.js';
 import Patient from './patient.js';
 import patientRoute from '../routes/patientRoute.js';
 import recordsRoute from '../routes/recordsRoute.js';
+import clinicRoute from '../routes/clinicRoute.js';
 import credentials from '../middleware/credentials.js';
 import userRoute from '../routes/userRoute.js';
 import getRequests from '../middleware/requests.js';
@@ -39,6 +40,8 @@ app.use(verifyToken);
 app.use('/patient', patientRoute);
 
 app.use('/records', recordsRoute);
+
+app.use('/clinic', clinicRoute);
 
 mongoose.connection.once('open', () => {
   console.log('connected to MongoDB');

@@ -55,7 +55,7 @@ async function registerPatient(req, res) {
     records: [genesisHash],
   });
 
-  //sending the genesis records to DB
+  //sending the genesis record to DB
   const createdMR = await MedicalRecordModel.create({
     genHash: genesisRecord.hash,
     records: [

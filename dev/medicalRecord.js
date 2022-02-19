@@ -6,7 +6,7 @@ class MedicalRecord {
     this.pendingMedTransaction = [];
   }
   //this creates a new record with hash and record data provided
-  createNewRecord(nonce, previousBlockHash, hash, recordData) {
+  createNewRecord(nonce, previousBlockHash, hash, recordData, lastRecord) {
     const newRecord = {
       date: Date.now(),
       recordData: recordData,
@@ -14,7 +14,7 @@ class MedicalRecord {
       previousBlockHash: previousBlockHash,
       hash: hash,
     };
-    const valid = this.proofOfConcept(newRecord);
+    const valid = this.proofOfConcept(newRecord, lastRecord);
     console.log(valid);
     this.medChain.push(newRecord);
 
@@ -61,12 +61,11 @@ class MedicalRecord {
     return this.medChain[this.medChain.length - 1];
   }
 
-  proofOfConcept(currentRecord) {
+  proofOfConcept(currentRecord, lastRecord) {
     //check if hash begins with '00000'
-
+    console.log('lastRecord in proofofconcept', lastRecord);
     let valid = false;
     const nonce = currentRecord.nonce;
-    const lastRecord = this.getLastBlock();
 
     if (lastRecord) {
       console.log('last record exists');

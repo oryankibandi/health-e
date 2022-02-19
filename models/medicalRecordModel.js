@@ -26,7 +26,7 @@ const medRecordSchema = new Schema({
         ],
         nextAppointment: {
           date: { type: String, default: null },
-          time: { type: Date, default: null },
+          time: { type: Date, default: Date.now() },
         },
       },
     },
