@@ -7,6 +7,6 @@ let router = express.Router();
 
 router.route('/').post(verifyUserRoles(ROLES.Doctor), getRecord);
 
-router.route('/post-record').post(verifyUserRoles(ROLES.Admin), postRecord);
+router.route('/post-record').post(verifyUserRoles(ROLES.Doctor), postRecord);
 
 export default router;

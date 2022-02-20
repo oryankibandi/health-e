@@ -95,6 +95,7 @@ async function postRecord(req, res) {
     nonce: nonce,
     previousHash: newRecord.previousBlockHash,
     record: newRecord.recordData,
+    date: new Date(),
   };
   console.log('formattedRecord =>', formattedRecord);
   const updatedRecord = await updateRecord(genesisHash, formattedRecord);

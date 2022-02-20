@@ -7,7 +7,7 @@ const medRecordSchema = new Schema({
   records: [
     {
       patientIdNo: { type: String, required: true },
-      date: { type: Date, required: true, default: Date.now() },
+      date: { type: Date, required: true, default: new Date() },
       clinic: { type: String, required: true },
       doctor: { type: String, required: true }, //userId
       hash: { type: String, required: true },
