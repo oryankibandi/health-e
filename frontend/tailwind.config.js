@@ -6,8 +6,11 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        homePage:
-          "url(bg-[url('https://www.fairplanet.org/wp-content/uploads/2017/08/clinic-kenya-1200x630.1502892754.jpg)",
+        homePage: "url('/assets/images/background.jpg')",
+        loginPage: "url('/assets/images/background2.jpg')",
+      },
+      fontFamily: {
+        Sansita: ['Sansita', 'serif'],
       },
     },
   },

@@ -26,7 +26,8 @@ async function loginUser(req, res) {
 
   console.log('match:', match);
   if (match === false) {
-    return res.status(401).json({
+    return res.json({
+      success: false,
       error: 'passwords do not match',
     });
   }
@@ -66,10 +67,11 @@ async function loginUser(req, res) {
     httpOnly: true,
     maxAge: 24 * 60 * 60 * 1000,
     sameSite: 'None',
-    secure: false, //may change to true if frontend doesn't doo much
+    secure: true, //may change to true if frontend doesn't doo much
   });
 
   res.status(200).json({
+    success: true,
     message: `Log in successful. Welcome ${foundUser.name}`,
     accessToken: accessToken,
   });

@@ -1,14 +1,12 @@
 import React from 'react'
+import HomepageBody from '../../components/homepageBody'
 import HomePageNavbar from '../../components/homePageNavbar'
 
 function HomePage() {
   return (
-    <div className="h-full w-full">
+    <div className="h-screen w-screen">
       <HomePageNavbar />
-      <div>
-        {/* Body */}
-        This is the body
-      </div>
+      <HomepageBody />
     </div>
   )
 }

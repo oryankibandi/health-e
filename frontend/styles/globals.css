@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .navbarItem {
+    @apply cursor-pointer text-lg hover:text-[#08BEF8];
+  }
+}
