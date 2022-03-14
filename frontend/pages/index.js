@@ -5,11 +5,9 @@ import HomePage from './homepage'
 
 const Home = () => {
   return (
-    <div className="h-full bg-homePage bg-cover bg-center">
-      <div className="flex h-full  bg-[#08BEF8] opacity-60 ">
-        {/* homepage */}
-        <HomePage />
-      </div>
+    <div className="h-screen w-screen bg-gray-100 bg-cover bg-center scrollbar-hide">
+      {/* homepage */}
+      <HomePage />
     </div>
   )
 }

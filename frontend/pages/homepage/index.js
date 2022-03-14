@@ -4,7 +4,7 @@ import HomePageNavbar from '../../components/homePageNavbar'
 
 function HomePage() {
   return (
-    <div className="h-screen w-screen">
+    <div className="h-screen w-screen scrollbar-hide">
       <HomePageNavbar />
       <HomepageBody />
     </div>

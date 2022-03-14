@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 function HomePageNavbar() {
   return (
-    <div className="py-15 flex h-20 w-screen flex-row items-center justify-between bg-black px-5 font-Sansita opacity-80 md:px-10 lg:px-28">
+    <div className="py-15 flex h-20 flex-row items-center justify-between bg-black px-5 font-Sansita opacity-80 scrollbar-hide md:px-10 lg:px-28">
       <Image
         src="/assets/icons/health-e.svg"
         width={180}
