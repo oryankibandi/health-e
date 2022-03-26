@@ -1,8 +1,17 @@
+import { useRouter } from 'next/router'
 import React from 'react'
 
 function PatientResultTile({ profileImage, name, idNo, sex, age }) {
+  const router = useRouter()
+  function toPatientsDash() {
+    router.push(`patientsPage/${idNo}`)
+  }
+
   return (
-    <div className="group  hover:period-1000 cursor-pointer rounded-lg bg-gray-50 px-8 py-6 text-center font-Sansita shadow-md hover:scale-105 hover:transform hover:ease-in-out">
+    <div
+      className="group  hover:period-1000 cursor-pointer rounded-lg bg-gray-50 px-8 py-6 text-center font-Sansita shadow-md hover:scale-105 hover:transform hover:ease-in-out"
+      onClick={toPatientsDash}
+    >
       <img
         src={profileImage}
         alt="patient profile pic"

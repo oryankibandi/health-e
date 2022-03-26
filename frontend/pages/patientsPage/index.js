@@ -14,31 +14,14 @@ import {
 import React from 'react'
 import DashboardNav from '../../components/dashboardNav'
 import DashboardNavItem from '../../components/dashboardNavItem'
+import DashboardSidebar from '../../components/dashboardSidebar'
 import PatientResultTile from '../../components/patientResultTile'
 
 function PatientsPage() {
   return (
     <div className="scrollbar-hidden flex h-screen flex-col bg-white sm:flex-row">
       {/* Sidebar */}
-      <div className="mx-4 items-center justify-center bg-gray-200 px-2 py-1 ">
-        <div className=" mx-2 flex  flex-col items-center justify-center border-b-2 border-[#08BEF8] px-4">
-          <img
-            src="/assets/images/imed.jpg"
-            className="h-40 w-40 cursor-pointer rounded-full hover:border-2 hover:border-[#08BEF8]"
-          />
-          <h1 className="font-Sansita text-2xl text-[#08BEF8]">I-Med Clinic</h1>
-          <p className="mb-4 font-Sansita text-gray-600">Juja, Kiambu</p>
-        </div>
-        <div className="mt-2 hidden flex-col space-y-8 py-2 px-2 sm:inline-flex">
-          <DashboardNavItem Icon={ViewGridIcon} title="Dashboard" />
-          <DashboardNavItem title="Patients" Icon={UsersIcon} />
-          <DashboardNavItem title="Schedule" Icon={CalendarIcon} />
-          <DashboardNavItem title="Statistics" Icon={ChartPieIcon} />
-          <DashboardNavItem title="Doctors Logs" Icon={ClipboardListIcon} />
-          <DashboardNavItem title="Payments" Icon={CreditCardIcon} />
-          <DashboardNavItem title="Logout" Icon={LogoutIcon} />
-        </div>
-      </div>
+      <DashboardSidebar />
 
       <div className=" flex h-screen flex-1 flex-col space-y-2 p-4">
         {/* body */}
@@ -69,6 +52,7 @@ function PatientsPage() {
             Recent
           </h1>
           {/* results and recents */}
+          {/* This part should be rendered dynamically */}
           <div className="grid grid-cols-2 gap-y-2 gap-x-2 overflow-y-auto py-2 px-2 scrollbar-hide md:grid-cols-3 md:gap-x-6 md:gap-y-4 lg:grid-cols-4">
             <PatientResultTile
               profileImage="/assets/images/IanKibandi.jpg"

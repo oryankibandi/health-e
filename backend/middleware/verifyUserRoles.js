@@ -12,7 +12,7 @@ function verifyUserRoles(...allowedRoles) {
     console.log('allowed', allowed);
 
     if (!allowed) {
-      return res.status(401).json({
+      return res.json({
         error: 'unauthorized page',
       });
     }

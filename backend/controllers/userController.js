@@ -42,7 +42,7 @@ async function loginUser(req, res) {
       },
     },
     process.env.ACCESS_TOKEN_SECRET,
-    { expiresIn: '900s' }
+    { expiresIn: '3600s' }
   );
 
   const refreshToken = jwt.sign(
@@ -159,8 +159,8 @@ async function registerUser(req, res) {
     nationality,
   } = req.body;
   if (!username || !password || !roles || !email) {
-    return res.status(401).json({
-      error: 'username and passworld required',
+    return res.json({
+      error: 'username and password required',
     });
   }
 
@@ -168,7 +168,7 @@ async function registerUser(req, res) {
   const duplicateName = await User.findOne({ name: username }).exec();
   const duplicateEmail = await User.findOne({ email: email }).exec();
   if (duplicateName || duplicateEmail) {
-    return res.status(409).json({
+    return res.json({
       error: 'Username or email already exists',
     });
   }
@@ -185,7 +185,10 @@ async function registerUser(req, res) {
     roles: [...roles],
     userId: uuidv4(),
   });
-  res.status(200).json(newUser);
+  res.status(200).json({
+    success: true,
+    newUserId: newUser.userId,
+  });
 }
 
 export { loginUser, refreshToken, logoutUser, registerUser };

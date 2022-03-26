@@ -4,7 +4,7 @@ async function registerClinic(req, res) {
   const { name, image, location, opening, closing, admin, doctors } = req.body;
 
   if (!name || !location || !image || !admin) {
-    return res.status(403).json({
+    return res.json({
       error: 'All details must be provided',
     });
   }
@@ -12,7 +12,7 @@ async function registerClinic(req, res) {
   const existingClinic = await ClinicModel.findOne({ name: name }).exec();
 
   if (existingClinic) {
-    return res.status(403).json({
+    return res.json({
       error: 'clinic already exists',
     });
   }
@@ -28,6 +28,7 @@ async function registerClinic(req, res) {
   });
 
   res.status(200).json({
+    success: true,
     newClinic: newClinic,
   });
 }
